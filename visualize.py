@@ -71,13 +71,13 @@ def save_visualization(frames, force_records, out_path: str):
     ax_torque.set_title("Actuator torques over time")
     ax_torque.legend(fontsize=7, ncol=4)
 
-    fig.suptitle("Franka Panda — Reach and Pick", fontsize=13, fontweight="bold")
+    fig.suptitle("Franka Panda — Reach and Grasp Cube", fontsize=13, fontweight="bold")
     plt.savefig(out_path, dpi=120, bbox_inches="tight")
     plt.close()
     print(f"Saved: {out_path}")
 
 
 if __name__ == "__main__":
-    out_path = os.path.join(OUTPUT_DIR, "franka_panda_reach_and_pick.png")
+    out_path = os.path.join(OUTPUT_DIR, "franka_panda_reach_and_grasp_cube.png")
     frames, force_records = run_episode_with_render()
     save_visualization(frames, force_records, out_path)
