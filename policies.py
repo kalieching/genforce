@@ -22,9 +22,9 @@ class ReachAndPickPolicy:
     _DESIRED_Z = np.array([0.0, 0.0, -1.0])
 
     def __init__(self, env, gain: float = 0.7, lam: float = 0.01):
-        self.env   = env
-        self.gain  = gain
-        self.lam   = lam
+        self.env = env
+        self.gain = gain
+        self.lam = lam
         self._phase = 0
 
         self._hand_id = mujoco.mj_name2id(env.model, mujoco.mjtObj.mjOBJ_BODY, "hand")
@@ -33,7 +33,7 @@ class ReachAndPickPolicy:
 
     def __call__(self, _obs) -> np.ndarray:
         model = self.env.model
-        data  = self.env.data
+        data = self.env.data
 
         target_pos, gripper_ctrl, tol = self.PHASES[self._phase]
 

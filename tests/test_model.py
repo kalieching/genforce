@@ -4,10 +4,10 @@ import pytest
 from model import ForceConditionedPolicy, flatten_obs
 from train import compute_loss, train_step, create_train_state
 
-OBS_DIM    = 132
+OBS_DIM = 132
 ACTION_DIM = 8
 BATCH_SIZE = 4
-KEY        = jax.random.PRNGKey(0)
+KEY = jax.random.PRNGKey(0)
 
 
 @pytest.fixture
@@ -25,7 +25,7 @@ def state():
 
 @pytest.fixture
 def batch():
-    obs     = jax.random.normal(KEY, (BATCH_SIZE, OBS_DIM))
+    obs = jax.random.normal(KEY, (BATCH_SIZE, OBS_DIM))
     actions = jax.random.normal(KEY, (BATCH_SIZE, ACTION_DIM))
     return obs, actions
 
@@ -42,10 +42,10 @@ def test_forward_pass_no_nan(model, params):
 
 def test_flatten_obs_shape():
     fake_batch = {
-        "observation/qpos":          jnp.zeros((BATCH_SIZE, 16)),
-        "observation/qvel":          jnp.zeros((BATCH_SIZE, 15)),
-        "observation/ctrl":          jnp.zeros((BATCH_SIZE, 8)),
-        "observation/cfrc_ext":      jnp.zeros((BATCH_SIZE, 78)),
+        "observation/qpos": jnp.zeros((BATCH_SIZE, 16)),
+        "observation/qvel": jnp.zeros((BATCH_SIZE, 15)),
+        "observation/ctrl": jnp.zeros((BATCH_SIZE, 8)),
+        "observation/cfrc_ext": jnp.zeros((BATCH_SIZE, 78)),
         "observation/qfrc_actuator": jnp.zeros((BATCH_SIZE, 15)),
     }
     out = flatten_obs(fake_batch)

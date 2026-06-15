@@ -26,8 +26,8 @@ python train.py
 
 **Replay an episode**
 ```bash
-mjpython replay.py          # live viewer (macOS)
-python replay.py --save     # export to output/replay.mp4
+mjpython replay.py # live viewer (macOS)
+python replay.py --save # export to output/replay.mp4
 ```
 
 **Visualize force data**

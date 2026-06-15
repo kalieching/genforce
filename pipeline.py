@@ -22,15 +22,15 @@ def _to_ints(arr) -> tf.train.Feature:
 def _make_feature(step: dict) -> tf.train.Example:
     obs = step["observation"]
     return tf.train.Example(features=tf.train.Features(feature={
-        "observation/qpos":          _to_floats(obs["qpos"]),
-        "observation/qvel":          _to_floats(obs["qvel"]),
-        "observation/ctrl":          _to_floats(obs["ctrl"]),
-        "observation/cfrc_ext":      _to_floats(obs["cfrc_ext"]),
+        "observation/qpos": _to_floats(obs["qpos"]),
+        "observation/qvel": _to_floats(obs["qvel"]),
+        "observation/ctrl": _to_floats(obs["ctrl"]),
+        "observation/cfrc_ext": _to_floats(obs["cfrc_ext"]),
         "observation/qfrc_actuator": _to_floats(obs["qfrc_actuator"]),
-        "action":      _to_floats(step["action"]),
-        "reward":      _to_floats([step["reward"]]),
-        "is_first":    _to_ints([step["is_first"]]),
-        "is_last":     _to_ints([step["is_last"]]),
+        "action": _to_floats(step["action"]),
+        "reward": _to_floats([step["reward"]]),
+        "is_first": _to_ints([step["is_first"]]),
+        "is_last": _to_ints([step["is_last"]]),
         "is_terminal": _to_ints([step["is_terminal"]]),
     }))
 
@@ -90,16 +90,16 @@ class DataPipeline:
         nu = nu or m.nu
         nbody = nbody or m.nbody
         parse_spec = {
-            "observation/qpos":          tf.io.FixedLenFeature([nq],       tf.float32),
-            "observation/qvel":          tf.io.FixedLenFeature([nv],       tf.float32),
-            "observation/ctrl":          tf.io.FixedLenFeature([nu],       tf.float32),
-            "observation/cfrc_ext":      tf.io.FixedLenFeature([nbody*6],  tf.float32),
-            "observation/qfrc_actuator": tf.io.FixedLenFeature([nv],       tf.float32),
-            "action":      tf.io.FixedLenFeature([nu], tf.float32),
-            "reward":      tf.io.FixedLenFeature([1],  tf.float32),
-            "is_first":    tf.io.FixedLenFeature([1],  tf.int64),
-            "is_last":     tf.io.FixedLenFeature([1],  tf.int64),
-            "is_terminal": tf.io.FixedLenFeature([1],  tf.int64),
+            "observation/qpos": tf.io.FixedLenFeature([nq], tf.float32),
+            "observation/qvel": tf.io.FixedLenFeature([nv], tf.float32),
+            "observation/ctrl": tf.io.FixedLenFeature([nu], tf.float32),
+            "observation/cfrc_ext": tf.io.FixedLenFeature([nbody * 6], tf.float32),
+            "observation/qfrc_actuator": tf.io.FixedLenFeature([nv], tf.float32),
+            "action": tf.io.FixedLenFeature([nu], tf.float32),
+            "reward": tf.io.FixedLenFeature([1], tf.float32),
+            "is_first": tf.io.FixedLenFeature([1], tf.int64),
+            "is_last": tf.io.FixedLenFeature([1], tf.int64),
+            "is_terminal": tf.io.FixedLenFeature([1], tf.int64),
         }
         pattern = os.path.join(self.out_dir, "*.tfrecord")
         files = tf.io.gfile.glob(pattern)

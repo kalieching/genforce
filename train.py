@@ -10,10 +10,10 @@ from model import ForceConditionedPolicy, flatten_obs
 
 CKPT_DIR = os.path.join(os.path.dirname(__file__), "checkpoints")
 
-HIDDEN_DIMS  = (256, 256, 128)
+HIDDEN_DIMS = (256, 256, 128)
 LEARNING_RATE = 1e-3
-BATCH_SIZE    = 64
-N_EPOCHS      = 50
+BATCH_SIZE = 64
+N_EPOCHS = 50
 
 
 def make_dataset(data_dir: str = DATA_DIR, batch_size: int = BATCH_SIZE):
@@ -68,7 +68,7 @@ def train(data_dir: str = DATA_DIR, ckpt_dir: str = CKPT_DIR):
 
     for epoch in range(N_EPOCHS):
         epoch_loss = 0.0
-        n_batches  = 0
+        n_batches = 0
         for batch in ds:
             obs = flatten_obs(batch)
             actions = jnp.asarray(batch["action"])
