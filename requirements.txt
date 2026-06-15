@@ -1,0 +1,9 @@
+mujoco>=3.9.0
+jax[cpu]
+flax
+optax
+orbax-checkpoint
+tensorflow
+imageio[ffmpeg]
+matplotlib
+pytest

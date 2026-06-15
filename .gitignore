@@ -1,0 +1,30 @@
+# Generated data and artifacts
+data/
+checkpoints/
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environments
+.env
+.venv
+env/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
