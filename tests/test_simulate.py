@@ -1,7 +1,3 @@
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
 import numpy as np
 import pytest
 from simulate import GenForceDataFactory
@@ -38,19 +34,19 @@ def test_get_force_state_shapes(env):
     assert force["qfrc_actuator"].shape == (env.model.nv,)
 
 def test_run_episode_length(env):
-    policy = lambda obs: np.zeros(env.model.nu)
+    policy = lambda _: np.zeros(env.model.nu)
     episode = env.run_episode(policy, max_steps=10)
     assert len(episode) == 10
 
 def test_run_episode_step_keys(env):
-    policy = lambda obs: np.zeros(env.model.nu)
+    policy = lambda _: np.zeros(env.model.nu)
     episode = env.run_episode(policy, max_steps=5)
     required = {"observation", "action", "reward", "is_first", "is_last", "is_terminal"}
     for step in episode:
         assert required.issubset(step.keys())
 
 def test_run_episode_flags(env):
-    policy = lambda obs: np.zeros(env.model.nu)
+    policy = lambda _: np.zeros(env.model.nu)
     episode = env.run_episode(policy, max_steps=5)
     assert episode[0]["is_first"] is True
     assert episode[-1]["is_last"] is True

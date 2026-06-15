@@ -60,7 +60,7 @@ def replay(steps: list, model: mujoco.MjModel, dt: float = 0.01):
 def save_video(steps: list, model: mujoco.MjModel,
                width: int = 640, height: int = 480, fps: int = 30,
                out_path: str = None):
-    """Render each qpos frame offscreen and write an MP4."""
+    """Render each qpos frame offscreen and write to an MP4 file."""
     import imageio
 
     if out_path is None:
@@ -80,7 +80,7 @@ def save_video(steps: list, model: mujoco.MjModel,
     renderer.close()
 
     imageio.mimwrite(out_path, frames, fps=fps)
-    print(f"Saved {len(frames)} frames → {out_path}")
+    print(f"Saved {len(frames)} frames to {out_path}")
     return out_path
 
 

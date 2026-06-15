@@ -12,13 +12,13 @@ class ForceConditionedPolicy(nn.Module):
     action_dim: int
 
     @nn.compact
-    def __call__(self, obs: jnp.ndarray, training: bool = False) -> jnp.ndarray:
+    def __call__(self, obs: jnp.ndarray) -> jnp.ndarray:
         x = obs
         for dim in self.hidden_dims:
             x = nn.Dense(dim)(x)
             x = nn.relu(x)
-        action = nn.Dense(self.action_dim)(x)
-        return action
+        return nn.Dense(self.action_dim)(x)
+
 
 def flatten_obs(batch: dict) -> jnp.ndarray:
     """Flatten a TFRecord batch (keys like 'observation/qpos') into a single vector."""

@@ -57,7 +57,7 @@ def train(data_dir: str = DATA_DIR, ckpt_dir: str = CKPT_DIR):
     # Infer dims from first batch
     sample = next(iter(ds))
     obs_sample = flatten_obs(sample)
-    obs_dim    = obs_sample.shape[-1]
+    obs_dim = obs_sample.shape[-1]
     action_dim = sample["action"].shape[-1]
 
     key = jax.random.PRNGKey(0)
@@ -70,11 +70,11 @@ def train(data_dir: str = DATA_DIR, ckpt_dir: str = CKPT_DIR):
         epoch_loss = 0.0
         n_batches  = 0
         for batch in ds:
-            obs     = flatten_obs(batch)
+            obs = flatten_obs(batch)
             actions = jnp.asarray(batch["action"])
             state, loss = train_step(state, obs, actions)
             epoch_loss += float(loss)
-            n_batches  += 1
+            n_batches += 1
 
         avg_loss = epoch_loss / max(n_batches, 1)
         print(f"Epoch {epoch + 1}/{N_EPOCHS}  loss={avg_loss:.4f}")

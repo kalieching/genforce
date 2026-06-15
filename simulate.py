@@ -31,13 +31,12 @@ def _build_scene(base_xml_path: str) -> mujoco.MjModel:
 class SimEnv:
     """Base MuJoCo simulation environment. Subclass and implement get_observation and get_force_state."""
 
-    def __init__(self, robot: str = "franka_panda", inject_noise: bool = False):
+    def __init__(self, robot: str = "franka_panda"):
         if robot not in ROBOT_REGISTRY:
             raise ValueError(f"Unknown robot '{robot}'. Available: {list(ROBOT_REGISTRY.keys())}")
 
         self.model = _build_scene(ROBOT_REGISTRY[robot])
         self.data = mujoco.MjData(self.model)
-        self.inject_noise = inject_noise
         self._viewer = None
         self._ctrl_range = self.model.actuator_ctrlrange.copy()
 

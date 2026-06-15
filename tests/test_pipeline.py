@@ -1,7 +1,3 @@
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
 import numpy as np
 import pytest
 import tensorflow as tf
@@ -14,7 +10,7 @@ def env():
 
 @pytest.fixture(scope="module")
 def episode(env):
-    policy = lambda obs: np.zeros(env.model.nu)
+    policy = lambda _: np.zeros(env.model.nu)
     return env.run_episode(policy, max_steps=10)
 
 def test_make_feature_keys(episode):
@@ -50,7 +46,7 @@ def test_round_trip(tmp_path, episode):
 
 def test_collect_creates_shards(tmp_path):
     pipeline = DataPipeline(out_dir=str(tmp_path))
-    policy = lambda obs: np.zeros(pipeline.env.model.nu)
+    policy = lambda _: np.zeros(pipeline.env.model.nu)
     pipeline.collect(policy, n_episodes=3, max_steps=5)
     files = list(tmp_path.glob("*.tfrecord"))
     assert len(files) == 3
