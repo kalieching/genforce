@@ -2,6 +2,8 @@
 
 A robotics dataset generation system that produces force-augmented trajectories for training robot manipulation policies. Alongside standard joint positions and velocities, GenForce records contact forces and actuator torques at every timestep.
 
+![Franka Panda — Reach and Grasp Cube](assets/franka_panda_reach_and_grasp_cube.png)
+
 ## Setup
 
 ```bash
